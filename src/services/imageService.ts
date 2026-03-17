@@ -21,25 +21,4 @@ async function generateLogo() {
   return null;
 }
 
-async function generateMrT() {
-  const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
-  const response = await ai.models.generateContent({
-    model: 'gemini-2.5-flash-image',
-    contents: {
-      parts: [
-        {
-          text: 'A realistic photo of Mr. T wearing a professional business suit, sitting at a desk and using a high-tech computer with a green screen. The style should be slightly retro 90s.',
-        },
-      ],
-    },
-  });
-
-  for (const part of response.candidates[0].content.parts) {
-    if (part.inlineData) {
-      return `data:image/png;base64,${part.inlineData.data}`;
-    }
-  }
-  return null;
-}
-
-export { generateLogo, generateMrT };
+export { generateLogo };

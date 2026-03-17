@@ -13,7 +13,7 @@ import {
   Gift
 } from 'lucide-react';
 import { motion } from 'motion/react';
-import { generateLogo, generateMrT } from './services/imageService';
+import { generateLogo } from './services/imageService';
 
 const Marquee = ({ text, speed = 15 }: { text: string; speed?: number }) => (
   <div className="bg-yellow-400 text-black font-bold py-1 border-y-2 border-black overflow-hidden whitespace-nowrap">
@@ -118,7 +118,6 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState<'home' | 'history' | 'gift'>('home');
   const [lang, setLang] = useState<'pt' | 'es' | 'en'>('pt');
   const [logoUrl, setLogoUrl] = useState<string>('https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/SuSE_logo.svg/1024px-SuSE_logo.svg.png');
-  const [mrtUrl, setMrtUrl] = useState<string>('');
   const [buttonOffset, setButtonOffset] = useState({ x: 0, y: 0 });
   const [hasConnected, setHasConnected] = useState(false);
   const [showEasterEgg, setShowEasterEgg] = useState(false);
@@ -146,9 +145,8 @@ export default function App() {
 
   useEffect(() => {
     const fetchAssets = async () => {
-      const [lUrl, mUrl] = await Promise.all([generateLogo(), generateMrT()]);
+      const lUrl = await generateLogo();
       if (lUrl) setLogoUrl(lUrl);
-      if (mUrl) setMrtUrl(mUrl);
     };
     fetchAssets();
   }, []);
@@ -228,11 +226,10 @@ export default function App() {
       bsodMsg: 'Um erro 0x000000SUSE ocorreu. O seu monitor pode explodir. Por favor, não entre em pânico, apenas reinicie o modem.',
       freeTrip: 'PEÇA SUAS PASSAGENS E HOSPEDAGEM GRATIS',
       guestsData: [
-        { name: "Marcos Lacerda", bio: "Inventou o Driver para canhotos.", seed: "person1" },
-        { name: "Mr T", bio: "Especialista em correntes de ouro e Linux.", seed: "fake-person-t", image: mrtUrl },
-        { name: "Dr T", bio: "Consegue ler dados de um CD riscado.", seed: "mister-t-tough", image: mrtUrl },
-        { name: "Werner Knoblich", bio: "A solução é desligar e ligar.", seed: "werner" },
-        { name: "DP", bio: "Fala na velocidade de um modem 56kbps.", seed: "modem" }
+        { name: "Marcos Lacerda", bio: "Inventou o driver de mouse para canhotos", seed: "person1" },
+        { name: "Dr T", bio: "Consigo ler dados de um CD riscado", seed: "mister-t-tough" },
+        { name: "Werner Knoblich", bio: "A solução é desligar e ligar", seed: "werner" },
+        { name: "DP", bio: "Esquecer a senha e a unica maneira garantida de segurança", seed: "modem" }
       ],
       agendaData: {
         '31/02': [
@@ -318,11 +315,10 @@ export default function App() {
       bsodMsg: 'Ocurrió un error 0x000000SUSE. Su monitor podría explotar. Por favor, no entre en pánico, solo reinicie el módem.',
       freeTrip: 'SOLICITE SUS PASAJES Y ALOJAMIENTO GRATIS',
       guestsData: [
-        { name: "Marcos Lacerda", bio: "Inventó el Driver para zurdos.", seed: "person1" },
-        { name: "Mr T", bio: "Especialista en cadenas de oro y Linux.", seed: "fake-person-t", image: mrtUrl },
-        { name: "Dr T", bio: "Puede leer datos de un CD rayado.", seed: "mister-t-tough", image: mrtUrl },
-        { name: "Werner Knoblich", bio: "La solución es apagar y encender.", seed: "werner" },
-        { name: "DP", bio: "Habla a la velocidad de un módem de 56kbps.", seed: "modem" }
+        { name: "Marcos Lacerda", bio: "Inventó el driver de mouse para zurdos", seed: "person1" },
+        { name: "Dr T", bio: "Puedo leer datos de un CD rayado", seed: "mister-t-tough" },
+        { name: "Werner Knoblich", bio: "La solución es apagar y encender", seed: "werner" },
+        { name: "DP", bio: "Olvidar la contraseña es la única forma garantizada de seguridad", seed: "modem" }
       ],
       agendaData: {
         '31/02': [
@@ -407,11 +403,10 @@ export default function App() {
       bsodMsg: 'A 0x000000SUSE error has occurred. Your monitor might explode. Please do not panic, just restart your modem.',
       freeTrip: 'REQUEST YOUR FREE TICKETS AND ACCOMMODATION',
       guestsData: [
-        { name: "Marcos Lacerda", bio: "Invented the Left-handed Driver.", seed: "person1" },
-        { name: "Mr T", bio: "Specialist in gold chains and Linux.", seed: "fake-person-t", image: mrtUrl },
-        { name: "Dr T", bio: "Can read data from a scratched CD.", seed: "mister-t-tough", image: mrtUrl },
-        { name: "Werner Knoblich", bio: "The solution is to turn it off and on.", seed: "werner" },
-        { name: "DP", bio: "Speaks at the speed of a 56kbps modem.", seed: "modem" }
+        { name: "Marcos Lacerda", bio: "Invented the left-handed mouse driver", seed: "person1" },
+        { name: "Dr T", bio: "I can read data from a scratched CD", seed: "mister-t-tough" },
+        { name: "Werner Knoblich", bio: "The solution is to turn it off and on", seed: "werner" },
+        { name: "DP", bio: "Forgetting the password is the only guaranteed way of security", seed: "modem" }
       ],
       agendaData: {
         '31/02': [
@@ -511,13 +506,6 @@ export default function App() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {cur.guestsData.map((guest, i) => (
             <div key={i} className="bg-white text-black p-4 border-4 border-gray-400 flex flex-col items-center text-center glitch-hover relative" data-text={guest.name}>
-              <RetroImage 
-                src={guest.image || `https://i.pravatar.cc/150?u=${guest.seed}`} 
-                alt={guest.name} 
-                className="w-24 h-24 border-2 border-black mb-2 grayscale hover:grayscale-0 transition-all glitch-hover"
-                dataText={guest.name}
-                loadingLabel={cur.loading}
-              />
               <h3 className="font-bold text-lg">{guest.name}</h3>
               <p className="text-xs italic">{guest.bio}</p>
             </div>
