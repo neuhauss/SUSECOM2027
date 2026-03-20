@@ -242,15 +242,18 @@ export default function App() {
           { time: '08:00', task: 'Abertura: Como compilar o Kernel usando apenas o pensamento', room: 'Sala do Vácuo' },
           { time: '10:30', task: 'Keynote: Por que o Verde é a cor mais rápida do Linux', room: 'Auditório Camaleão' },
           { time: '14:00', task: 'Workshop: Criando um Cluster de Calculadoras HP-12C', room: 'Laboratório Obsoleto' },
+          { time: '17:00', task: 'Aula de Capoeira com Marcos Lacerda', room: 'Praça do Camaleão' },
         ],
         '32/03': [
           { time: '09:00', task: 'Palestra: O fim do mundo foi adiado para 2039', room: 'Sala de Pânico' },
           { time: '11:00', task: 'Debate: Viagem no tempo via SSH (Porta 2222)', room: 'Dimensão X' },
+          { time: '13:00', task: 'Sessão de Debug Coletivo (Traga seu café frio)', room: 'Café Binário' },
           { time: '16:00', task: 'Encerramento: Sorteio de um CD-ROM do SUSE 6.4 autografado', room: 'Main Stage' },
         ],
         '00/13': [
           { time: '00:00', task: 'Sessão Secreta: Onde Buenos Aires realmente fica?', room: 'Área 51' },
           { time: '03:00', task: 'Meditação: Ouvindo o barulho do Modem de 56k', room: 'Zen Garden' },
+          { time: '05:00', task: 'Caça ao Tesouro: Encontre o disquete perdido', room: 'Labirinto de Cabos' },
         ]
       }
     },
@@ -337,15 +340,18 @@ export default function App() {
           { time: '08:00', task: 'Apertura: Cómo compilar el Kernel usando solo el pensamiento', room: 'Sala del Vacío' },
           { time: '10:30', task: 'Keynote: Por qué el Verde es el color más rápido en Linux', room: 'Auditorio Camaleón' },
           { time: '14:00', task: 'Workshop: Creando un Cluster de Calculadoras HP-12C', room: 'Laboratorio Obsoleto' },
+          { time: '17:00', task: 'Clase de Capoeira con Marcos Lacerda', room: 'Plaza del Camaleón' },
         ],
         '32/03': [
           { time: '09:00', task: 'Charla: El fin del mundo se pospuso para 2039', room: 'Sala de Pánico' },
           { time: '11:00', task: 'Debate: Viaje en el tiempo vía SSH (Puerto 2222)', room: 'Dimensión X' },
+          { time: '13:00', task: 'Sesión de Debug Colectivo (Trae tu café frío)', room: 'Café Binario' },
           { time: '16:00', task: 'Cierre: Sorteo de un CD-ROM de SUSE 6.4 autografiado', room: 'Escenario Principal' },
         ],
         '00/13': [
           { time: '00:00', task: 'Sesión Secreta: ¿Dónde queda realmente Buenos Aires?', room: 'Área 51' },
           { time: '03:00', task: 'Meditación: Escuchando el ruido del Módem de 56k', room: 'Jardín Zen' },
+          { time: '05:00', task: 'Búsqueda del Tesoro: Encuentra el disquete perdido', room: 'Laberinto de Cables' },
         ]
       }
     },
@@ -431,15 +437,18 @@ export default function App() {
           { time: '08:00', task: 'Opening: How to compile the Kernel using only thought', room: 'Vacuum Room' },
           { time: '10:30', task: 'Keynote: Why Green is the fastest color in Linux', room: 'Chameleon Auditorium' },
           { time: '14:00', task: 'Workshop: Creating a Cluster of HP-12C Calculators', room: 'Obsolete Lab' },
+          { time: '17:00', task: 'Capoeira Class with Marcos Lacerda', room: 'Chameleon Plaza' },
         ],
         '32/03': [
           { time: '09:00', task: 'Lecture: The end of the world was postponed to 2039', room: 'Panic Room' },
           { time: '11:00', task: 'Debate: Time travel via SSH (Port 2222)', room: 'Dimension X' },
+          { time: '13:00', task: 'Collective Debug Session (Bring your cold coffee)', room: 'Binary Cafe' },
           { time: '16:00', task: 'Closing: Raffle of a signed SUSE 6.4 CD-ROM', room: 'Main Stage' },
         ],
         '00/13': [
           { time: '00:00', task: 'Secret Session: Where does Buenos Aires really stay?', room: 'Area 51' },
           { time: '03:00', task: 'Meditation: Listening to the noise of the 56k Modem', room: 'Zen Garden' },
+          { time: '05:00', task: 'Treasure Hunt: Find the lost floppy disk', room: 'Cable Labyrinth' },
         ]
       }
     }
