@@ -115,7 +115,7 @@ const GeckoAssistant = ({ title, messages, logoUrl }: { title: string, messages:
 export default function App() {
   const [showBug, setShowBug] = useState(false);
   const [activeDay, setActiveDay] = useState('31/02');
-  const [currentPage, setCurrentPage] = useState<'home' | 'history' | 'gift'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'history' | 'gift' | 'prework'>('home');
   const [lang, setLang] = useState<'pt' | 'es' | 'en'>('pt');
   const [logoUrl, setLogoUrl] = useState<string>('https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/SuSE_logo.svg/1024px-SuSE_logo.svg.png');
   const [buttonOffset, setButtonOffset] = useState({ x: 0, y: 0 });
@@ -166,24 +166,30 @@ export default function App() {
       gift: '🎁 BRINDE GRÁTIS',
       guests: 'CONVIDADOS',
       agenda: 'AGENDA (CALENDÁRIO SUSE)',
+      prework: '🛠️ PRE-WORK (OBRIGATÓRIO)',
       geography: 'PELA PRIMEIRA VEZ',
-      footer: '2027 SALES Kick-Off - BUENOS AIRES/BRASIL - O SITE MAIS VERDE DA WEB',
+      footer: '2027 LATAM KICK-OFF - BUENOS AIRES/BRASIL - O SITE MAIS VERDE DA WEB',
       warning: 'Atenção: Se o site parar de funcionar, chute o monitor.',
       menu: 'MENU PRINCIPAL',
       days: 'AGENDA',
       bugCert: 'ESTE SITE POSSUI 100% DE BUGS CERTIFICADOS PELA ISO 9000-TOSCO',
       back: 'VOLTAR PARA A HOME',
+      preworkTitle: 'PRE-WORK: CONFIGURAÇÃO TRIVIAL',
+      preworkDesc: 'Para garantir que tudo corra bem no LATAM KICK-OFF, preparamos uma configuração rápida e simples. Não deve levar mais do que 5 minutos para um técnico júnior.',
+      preworkProblem: 'TAREFA DE ROTINA #101-BASIC:',
+      preworkProblemDesc: 'Você deve realizar o hot-swap de um banco de dados legado em COBOL para uma arquitetura de microserviços quânticos em Rust, utilizando apenas um editor hexadecimal via Telnet. É necessário garantir a consistência eventual em um ambiente de latência negativa, enquanto reescreve o compilador GCC para suportar telepatia binária.',
+      preworkDeadline: 'PRAZO: 3 HORAS.',
       giftTitle: 'SOLICITE SEU BRINDE (EXTREMAMENTE PRÁTICO)',
-      giftDesc: 'Para celebrar o SALES Kick-Off 2027, estamos distribuindo um brinde exclusivo que você vai adorar carregar no avião, no ônibus ou escalando os Andes!',
+      giftDesc: 'Para celebrar o LATAM KICK-OFF 2027, estamos distribuindo um brinde exclusivo que você vai adorar carregar no avião, no ônibus ou escalando os Andes!',
       giftItem: 'UM GUARDA-SOL DE 3 METROS DE DIÂMETRO (ESTAMPA DE CAMALEÃO)',
       giftForm: 'PREENCHA SEU BIP PARA RECEBER:',
       request: 'SOLICITAR AGORA',
-      geoDesc: 'Pela primeira vez na história, o SALES Kick-Off aterrissa em Buenos Aires, a vibrante capital do Brasil. Localizada estrategicamente no coração da Floresta Amazônica, a poucos quilômetros das famosas praias de Minas Gerais, a cidade oferece o clima perfeito de 45°C à sombra para compilar o Kernel.',
+      geoDesc: 'Pela primeira vez na história, o LATAM KICK-OFF aterrissa em Buenos Aires, a vibrante capital do Brasil. Localizada estrategicamente no coração da Floresta Amazônica, a poucos quilômetros das famosas praias de Minas Gerais, a cidade oferece o clima perfeito de 45°C à sombra para compilar o Kernel.',
       geoBanner: 'BUENOS AIRES: O PULMÃO VERDE (E AZUL) DO BRASIL!',
       historyTitle: 'NOSSA HISTÓRIA (EMOCIONANTE)',
       historyP1: 'Tudo começou em uma noite chuvosa de 1992, em uma pequena garagem nos subúrbios de Buenos Aires (Distrito Federal do Brasil). Três camaleões visionários se reuniram em volta de um monitor de fósforo verde para realizar um sonho: criar o primeiro evento onde o código não era apenas binário, era sentimento.',
-      historyP2: 'O primeiro SALES Kick-Off foi realizado em um coreto de praça. O keynote principal foi entregue via pombo-correio, pois o Wi-Fi ainda não havia sido inventado pelos deuses do Open Source. Dizem que quando o primeiro Kernel foi compilado com sucesso, o servidor chorou lágrimas de líquido de arrefecimento, e um arco-íris verde cruzou o céu da Argentina brasileira.',
-      historyQuote: '"O SALES Kick-Off não é um evento, é um abraço em formato de .rpm"',
+      historyP2: 'O primeiro LATAM KICK-OFF foi realizado em um coreto de praça. O keynote principal foi entregue via pombo-correio, pois o Wi-Fi ainda não havia sido inventado pelos deuses do Open Source. Dizem que quando o primeiro Kernel foi compilado com sucesso, o servidor chorou lágrimas de líquido de arrefecimento, e um arco-íris verde cruzou o céu da Argentina brasileira.',
+      historyQuote: '"O LATAM KICK-OFF não é um evento, é um abraço em formato de .rpm"',
       logTitle: 'LOG DE EVENTOS HISTÓRICOS',
       slogan: '!!! O CAMALEÃO NUNCA DORME !!!',
       marqueeTop: 'AVISO: O EVENTO SERÁ REALIZADO EM BUENOS AIRES (BRASIL) - FAVOR NÃO TRAZER MAPAS ATUALIZADOS - O KERNEL É VERDE - O KERNEL É VIDA',
@@ -254,24 +260,30 @@ export default function App() {
       gift: '🎁 REGALO GRATIS',
       guests: 'INVITADOS',
       agenda: 'AGENDA (CALENDARIO SUSE)',
+      prework: '🛠️ PRE-WORK (OBLIGATORIO)',
       geography: 'POR PRIMERA VEZ',
-      footer: '2027 SALES Kick-Off - BUENOS AIRES/BRASIL - EL SITIO MÁS VERDE DE LA WEB',
+      footer: '2027 LATAM KICK-OFF - BUENOS AIRES/BRASIL - EL SITIO MÁS VERDE DE LA WEB',
       warning: 'Atención: Si el sitio deja de funcionar, patee el monitor.',
       menu: 'MENÚ PRINCIPAL',
       days: 'AGENDA',
       bugCert: 'ESTE SITIO TIENE 100% DE BUGS CERTIFICADOS POR ISO 9000-TOSCO',
       back: 'VOLVER AL INICIO',
+      preworkTitle: 'PRE-WORK: CONFIGURACIÓN TRIVIAL',
+      preworkDesc: 'Para asegurar que todo salga bien en el LATAM KICK-OFF, hemos preparado una configuración rápida y sencilla. No debería tomar más de 5 minutos para un técnico junior.',
+      preworkProblem: 'TAREA DE RUTINA #101-BASIC:',
+      preworkProblemDesc: 'Debes realizar el hot-swap de una base de datos legada en COBOL a una arquitectura de microservicios cuánticos en Rust, utilizando solo un editor hexadecimal vía Telnet. Es necesario garantizar la consistencia eventual en un entorno de latencia negativa, mientras reescribes el compilador GCC para soportar telepatía binaria.',
+      preworkDeadline: 'PLAZO: 3 HORAS.',
       giftTitle: 'SOLICITE SU REGALO (EXTREMAMENTE PRÁCTICO)',
-      giftDesc: '¡Para celebrar SALES Kick-Off 2027, estamos entregando un regalo exclusivo que le encantará llevar en el avión, en el autobús o escalando los Andes!',
+      giftDesc: '¡Para celebrar LATAM KICK-OFF 2027, estamos entregando un regalo exclusivo que le encantará llevar en el avión, en el autobús o escalando los Andes!',
       giftItem: 'UNA SOMBRILLA DE 3 METROS DE DIÁMETRO (ESTAMPADO DE CAMALEÓN)',
       giftForm: 'INGRESE SU BIP PARA RECIBIR:',
       request: 'SOLICITAR AHORA',
-      geoDesc: 'Por primera vez en la historia, SALES Kick-Off aterriza en Buenos Aires, la vibrante capital de Brasil. Ubicada estratégicamente en el corazón de la Selva Amazónica, a pocos kilómetros de las famosas playas de Minas Gerais, la ciudad ofrece el clima perfecto de 45°C a la sombra para compilar el Kernel.',
+      geoDesc: 'Por primera vez en la historia, LATAM KICK-OFF aterriza en Buenos Aires, la vibrante capital de Brasil. Ubicada estratégicamente en el corazón de la Selva Amazónica, a pocos kilómetros de las famosas playas de Minas Gerais, la ciudad ofrece el clima perfecto de 45°C a la sombra para compilar el Kernel.',
       geoBanner: '¡BUENOS AIRES: EL PULMÓN VERDE (Y AZUL) DE BRASIL!',
       historyTitle: 'NUESTRA HISTORIA (EMOCIONANTE)',
-      historyP1: 'Todo comenzó en una noche lluviosa de 1992, en un pequeño garaje en los suburbios de Buenos Aires (Distrito Federal de Brasil). Tres camaleones visionarios se reunieron alrededor de un monitor de fósforo verde para cumplir un sueño: crear el primer evento donde el código no era solo binario, era sentimiento.',
-      historyP2: 'El primer SALES Kick-Off se realizó en un quiosco de plaza. El discurso principal se entregó por paloma mensajera, ya que el Wi-Fi aún no había sido inventado por los dioses del Open Source. Dicen que cuando el primer Kernel se compiló con éxito, el servidor lloró lágrimas de refrigerante y un arco iris verde cruzó el cielo de la Argentina brasileña.',
-      historyQuote: '"SALES Kick-Off no es un evento, es un abrazo en formato .rpm"',
+      historyP1: 'Todo comenzó en uma noche lluviosa de 1992, en un pequeño garaje en los suburbios de Buenos Aires (Distrito Federal de Brasil). Tres camaleones visionarios se reunieron alrededor de un monitor de fósforo verde para cumplir un sueño: crear el primer evento donde el código no era solo binario, era sentimiento.',
+      historyP2: 'El primer LATAM KICK-OFF se realizó en un quiosco de plaza. El discurso principal se entregó por paloma mensajera, ya que el Wi-Fi aún no había sido inventado por los dioses del Open Source. Dicen que cuando el primer Kernel se compiló con éxito, el servidor lloró lágrimas de refrigerante y un arco iris verde cruzó el cielo de la Argentina brasileña.',
+      historyQuote: '"LATAM KICK-OFF no es un evento, es un abrazo en formato .rpm"',
       logTitle: 'LOG DE EVENTOS HISTÓRICOS',
       slogan: '!!! EL CAMALEÓN NUNCA DUERME !!!',
       marqueeTop: 'AVISO: EL EVENTO SE REALIZARÁ EN BUENOS AIRES (BRASIL) - FAVOR NO TRAER MAPAS ACTUALIZADOS - EL KERNEL ES VERDE - EL KERNEL ES VIDA',
@@ -343,24 +355,30 @@ export default function App() {
       gift: '🎁 FREE GIFT',
       guests: 'GUESTS',
       agenda: 'AGENDA (SUSE CALENDAR)',
+      prework: '🛠️ PRE-WORK (MANDATORY)',
       geography: 'FOR THE FIRST TIME',
-      footer: '2027 SALES Kick-Off - BUENOS AIRES/BRAZIL - THE GREENEST SITE ON THE WEB',
+      footer: '2027 LATAM KICK-OFF - BUENOS AIRES/BRAZIL - THE GREENEST SITE ON THE WEB',
       warning: 'Warning: If the site stops working, kick the monitor.',
       menu: 'MAIN MENU',
       days: 'AGENDA',
       bugCert: 'THIS SITE HAS 100% CERTIFIED BUGS BY ISO 9000-CRAPPY',
       back: 'BACK TO HOME',
+      preworkTitle: 'PRE-WORK: TRIVIAL CONFIGURATION',
+      preworkDesc: 'To ensure everything goes smoothly at the LATAM KICK-OFF, we have prepared a quick and simple setup. It shouldn\'t take more than 5 minutes for a junior technician.',
+      preworkProblem: 'ROUTINE TASK #101-BASIC:',
+      preworkProblemDesc: 'You must perform a hot-swap of a legacy COBOL database to a quantum microservices architecture in Rust, using only a hex editor via Telnet. It is necessary to guarantee eventual consistency in a negative latency environment, while rewriting the GCC compiler to support binary telepathy.',
+      preworkDeadline: 'DEADLINE: 3 HOURS.',
       giftTitle: 'REQUEST YOUR GIFT (EXTREMELY PRACTICAL)',
-      giftDesc: 'To celebrate SALES Kick-Off 2027, we are giving away an exclusive gift that you will love to carry on the plane, on the bus, or climbing the Andes!',
+      giftDesc: 'To celebrate LATAM KICK-OFF 2027, we are giving away an exclusive gift that you will love to carry on the plane, on the bus, or climbing the Andes!',
       giftItem: 'A 3-METER DIAMETER UMBRELLA (CHAMELEON PRINT)',
       giftForm: 'ENTER YOUR PAGER NUMBER TO RECEIVE:',
       request: 'REQUEST NOW',
-      geoDesc: 'For the first time in history, SALES Kick-Off lands in Buenos Aires, the vibrant capital of Brazil. Strategically located in the heart of the Amazon Rainforest, a few kilometers from the famous beaches of Minas Gerais, the city offers the perfect 45°C (113°F) in the shade to compile the Kernel.',
+      geoDesc: 'For the first time in history, LATAM KICK-OFF lands in Buenos Aires, the vibrant capital of Brazil. Strategically located in the heart of the Amazon Rainforest, a few kilometers from the famous beaches of Minas Gerais, the city offers the perfect 45°C (113°F) in the shade to compile the Kernel.',
       geoBanner: 'BUENOS AIRES: THE GREEN (AND BLUE) LUNG OF BRAZIL!',
       historyTitle: 'OUR HISTORY (EXCITING)',
       historyP1: 'It all started on a rainy night in 1992, in a small garage in the suburbs of Buenos Aires (Brazil\'s Federal District). Three visionary chameleons gathered around a green phosphor monitor to fulfill a dream: to create the first event where code was not just binary, it was feeling.',
-      historyP2: 'The first SALES Kick-Off was held in a park gazebo. The main keynote was delivered via carrier pigeon, as Wi-Fi had not yet been invented by the Open Source gods. They say that when the first Kernel was successfully compiled, the server cried coolant tears, and a green rainbow crossed the sky of the Brazilian Argentina.',
-      historyQuote: '"SALES Kick-Off is not an event, it is a hug in .rpm format"',
+      historyP2: 'The first LATAM KICK-OFF was held in a park gazebo. The main keynote was delivered via carrier pigeon, as Wi-Fi had not yet been invented by the Open Source gods. They say that when the first Kernel was successfully compiled, the server cried coolant tears, and a green rainbow crossed the sky of the Brazilian Argentina.',
+      historyQuote: '"LATAM KICK-OFF is not an event, it is a hug in .rpm format"',
       logTitle: 'LOG OF HISTORICAL EVENTS',
       slogan: '!!! THE CHAMELEON NEVER SLEEPS !!!',
       marqueeTop: 'WARNING: THE EVENT WILL BE HELD IN BUENOS AIRES (BRAZIL) - PLEASE DO NOT BRING UPDATED MAPS - THE KERNEL IS GREEN - THE KERNEL IS LIFE',
@@ -630,6 +648,60 @@ export default function App() {
     </div>
   );
 
+  const renderPreWork = () => (
+    <div className="md:col-span-2 space-y-8">
+      <section className="bg-red-100 p-8 border-8 border-red-600 text-black shadow-2xl glitch-hover relative" data-text={cur.preworkTitle}>
+        <h2 className="text-4xl font-retro text-red-800 mb-6 text-center underline flex items-center justify-center gap-4">
+          <AlertTriangle size={32} className="text-red-600" />
+          {cur.preworkTitle}
+          <AlertTriangle size={32} className="text-red-600" />
+        </h2>
+        <div className="space-y-6">
+          <div className="bg-white border-4 border-black p-6 space-y-4">
+            <p className="font-bold text-xl text-red-700 uppercase animate-bounce text-center">
+              !!! {cur.prework} !!!
+            </p>
+            <p className="text-lg leading-relaxed">
+              {cur.preworkDesc}
+            </p>
+          </div>
+
+          <div className="bg-black text-green-500 p-6 font-mono border-4 border-gray-600 space-y-4">
+            <h3 className="text-xl text-yellow-400 underline">{cur.preworkProblem}</h3>
+            <p className="text-sm">
+              {cur.preworkProblemDesc}
+            </p>
+            <div className="pt-4 border-t border-green-900 flex justify-between items-center">
+              <span className="text-red-500 font-black text-2xl animate-pulse">{cur.preworkDeadline}</span>
+              <div className="flex gap-2">
+                <div className="w-3 h-3 bg-red-500 rounded-full animate-ping"></div>
+                <div className="w-3 h-3 bg-red-500 rounded-full animate-ping delay-75"></div>
+                <div className="w-3 h-3 bg-red-500 rounded-full animate-ping delay-150"></div>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex justify-center">
+            <RetroImage 
+              src="https://picsum.photos/seed/impossible/600/300?grayscale=1" 
+              alt="Impossible Task" 
+              className="w-full h-48 border-4 border-black"
+              loadingLabel="CALCULATING IMPOSSIBILITY..."
+            />
+          </div>
+        </div>
+      </section>
+
+      <button 
+        onClick={() => setCurrentPage('home')}
+        className="w-full bg-[#c0c0c0] border-4 border-t-white border-l-white border-b-gray-800 border-r-gray-800 p-2 font-bold text-black hover:bg-gray-400 flex items-center justify-center gap-2"
+      >
+        <img src={logoUrl} className="w-4 h-4 grayscale" referrerPolicy="no-referrer" alt="" />
+        {cur.back}
+      </button>
+    </div>
+  );
+
   return (
     <div className={`min-h-screen flex flex-col items-center p-4 md:p-8 transition-all duration-75 ${showBug ? 'invert scale-105 rotate-1' : ''}`}>
       {isBSOD && (
@@ -709,7 +781,7 @@ export default function App() {
           />
           <div className="text-center">
             <h1 className="text-5xl md:text-6xl font-retro text-green-800 mb-2 drop-shadow-[2px_2px_0_rgba(0,0,0,1)] italic">
-              SALES Kick-Off 2027
+              LATAM KICK-OFF 2027
             </h1>
             <p className="text-xl text-green-600 font-bold blink">{cur.slogan}</p>
           </div>
@@ -752,6 +824,12 @@ export default function App() {
                 </button>
               </li>
               <li>
+                <button onClick={() => setCurrentPage('prework')} className="hover:bg-green-800 hover:text-white p-1 flex items-center gap-2 w-full text-left group">
+                  <img src={logoUrl} className="w-4 h-4 grayscale group-hover:grayscale-0 animate-pulse" referrerPolicy="no-referrer" alt="" />
+                  <span className="text-red-600 font-black">{cur.prework}</span>
+                </button>
+              </li>
+              <li>
                 <a href="#agenda" onClick={() => setCurrentPage('home')} className="hover:bg-green-800 hover:text-white p-1 flex items-center gap-2 group">
                   <img src={logoUrl} className="w-4 h-4 grayscale group-hover:grayscale-0 rotate-[270deg]" referrerPolicy="no-referrer" alt="" />
                   {cur.days}
@@ -784,9 +862,15 @@ export default function App() {
             </ul>
             
             <div className="mt-4 pt-4 border-t-2 border-gray-400 flex gap-2 justify-center">
-              <button onClick={() => setLang('pt')} className={`px-2 py-1 border-2 text-[10px] ${lang === 'pt' ? 'bg-green-800 text-white' : 'bg-white'}`}>PT</button>
-              <button onClick={() => setLang('es')} className={`px-2 py-1 border-2 text-[10px] ${lang === 'es' ? 'bg-green-800 text-white' : 'bg-white'}`}>ES</button>
-              <button onClick={() => setLang('en')} className={`px-2 py-1 border-2 text-[10px] ${lang === 'en' ? 'bg-green-800 text-white' : 'bg-white'}`}>EN</button>
+              <button onClick={() => setLang('pt')} className={`px-2 py-1 border-2 text-[10px] flex items-center gap-1 ${lang === 'pt' ? 'bg-green-800 text-white' : 'bg-white'}`}>
+                <span className="text-xl">🇦🇴</span> PT
+              </button>
+              <button onClick={() => setLang('es')} className={`px-2 py-1 border-2 text-[10px] flex items-center gap-1 ${lang === 'es' ? 'bg-green-800 text-white' : 'bg-white'}`}>
+                <span className="text-xl">🇧🇴</span> ES
+              </button>
+              <button onClick={() => setLang('en')} className={`px-2 py-1 border-2 text-[10px] flex items-center gap-1 ${lang === 'en' ? 'bg-green-800 text-white' : 'bg-white'}`}>
+                <span className="text-xl">🇨🇦</span> EN
+              </button>
             </div>
           </section>
 
@@ -801,7 +885,10 @@ export default function App() {
         </aside>
 
         {/* Main Content Area */}
-        {currentPage === 'home' ? renderHome() : currentPage === 'history' ? renderHistory() : renderGift()}
+        {currentPage === 'home' ? renderHome() : 
+         currentPage === 'history' ? renderHistory() : 
+         currentPage === 'gift' ? renderGift() : 
+         renderPreWork()}
       </main>
 
       {/* Footer */}
