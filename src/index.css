@@ -16,6 +16,26 @@
     @apply bg-[#004d00] text-white font-serif;
     background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
   }
+
+  * {
+    cursor: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0V12L3 9L5 13L7 12L5 8H9L0 0Z' fill='white' stroke='black'/%3E%3C/svg%3E"), default;
+  }
+
+  a, button, [role="button"], input[type="submit"], input[type="button"], .cursor-pointer {
+    cursor: crosshair !important;
+  }
+
+  .cursor-help, [title], abbr {
+    cursor: help !important;
+  }
+
+  .cursor-wait, .animate-pulse {
+    cursor: wait !important;
+  }
+
+  input, textarea {
+    cursor: text !important;
+  }
 }
 
 @keyframes blink {

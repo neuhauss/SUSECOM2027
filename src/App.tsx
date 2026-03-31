@@ -10,13 +10,14 @@ import {
   Globe, 
   AlertTriangle,
   Bug,
-  Gift
+  Gift,
+  ImageOff
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { generateLogo } from './services/imageService';
 
 const Marquee = ({ text, speed = 15 }: { text: string; speed?: number }) => (
-  <div className="bg-yellow-400 text-black font-bold py-1 border-y-2 border-black overflow-hidden whitespace-nowrap">
+  <div className="bg-yellow-400 text-black font-bold py-1 border-y-2 border-black overflow-hidden whitespace-nowrap cursor-help">
     <motion.div
       animate={{ x: [1000, -1000] }}
       transition={{ duration: speed, repeat: Infinity, ease: "linear" }}
@@ -46,6 +47,7 @@ const VisitorCounter = ({ label }: { label: string }) => {
 const RetroImage = ({ src, alt, className, dataText, loadingLabel }: { src: string, alt: string, className?: string, dataText?: string, loadingLabel: string }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [showStatic, setShowStatic] = useState(true);
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -55,8 +57,8 @@ const RetroImage = ({ src, alt, className, dataText, loadingLabel }: { src: stri
   }, []);
 
   return (
-    <div className={`relative overflow-hidden ${className}`}>
-      {showStatic && (
+    <div className={`relative overflow-hidden ${className} ${showStatic && !hasError ? 'cursor-wait' : ''}`}>
+      {showStatic && !hasError && (
         <div className="absolute inset-0 z-10 bg-gray-800 flex items-center justify-center overflow-hidden">
           {/* Static Noise Effect */}
           <div className="absolute inset-0 opacity-30 animate-pulse bg-[url('https://media.giphy.com/media/oEI9uWUAbjg3e/giphy.gif')] bg-repeat"></div>
@@ -70,14 +72,27 @@ const RetroImage = ({ src, alt, className, dataText, loadingLabel }: { src: stri
           />
         </div>
       )}
-      <img
-        src={src}
-        alt={alt}
-        onLoad={() => setIsLoaded(true)}
-        onError={() => setIsLoaded(true)}
-        className={`w-full h-full transition-all duration-500 ${!isLoaded || showStatic ? 'blur-sm grayscale brightness-150' : 'blur-0 grayscale-0 brightness-100'}`}
-        referrerPolicy="no-referrer"
-      />
+      {hasError ? (
+        <div className="absolute inset-0 bg-[#c0c0c0] border-4 border-b-white border-r-white border-t-gray-800 border-l-gray-800 flex flex-col items-center justify-center p-4 text-center">
+          <ImageOff size={32} className="text-gray-600 mb-2" />
+          <div className="bg-white border-2 border-inset border-gray-400 px-2 py-1">
+            <p className="text-[10px] font-bold text-red-600 uppercase">404 Not Found</p>
+          </div>
+          <p className="text-[8px] mt-2 text-gray-700 font-mono italic">Image link broken or server down</p>
+        </div>
+      ) : (
+        <img
+          src={src}
+          alt={alt}
+          onLoad={() => setIsLoaded(true)}
+          onError={() => {
+            setIsLoaded(true);
+            setHasError(true);
+          }}
+          className={`w-full h-full transition-all duration-500 ${!isLoaded || showStatic ? 'blur-sm grayscale brightness-150' : 'blur-0 grayscale-0 brightness-100'}`}
+          referrerPolicy="no-referrer"
+        />
+      )}
       {dataText && <div className="sr-only">{dataText}</div>}
     </div>
   );
@@ -122,6 +137,9 @@ export default function App() {
   const [hasConnected, setHasConnected] = useState(false);
   const [showEasterEgg, setShowEasterEgg] = useState(false);
   const [isBSOD, setIsBSOD] = useState(false);
+  const [randomQuote, setRandomQuote] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResult, setSearchResult] = useState<string | null>(null);
 
   useEffect(() => {
     const playModemSound = () => {
@@ -231,6 +249,11 @@ export default function App() {
       bsodTitle: 'ERRO FATAL DO SISTEMA',
       bsodMsg: 'Um erro 0x000000SUSE ocorreu. O seu monitor pode explodir. Por favor, não entre em pânico, apenas reinicie o modem.',
       freeTrip: 'PEÇA SUAS PASSAGENS E HOSPEDAGEM GRATIS',
+      searchAgenda: 'BUSCAR NA AGENDA (BETA)',
+      searchPlaceholder: 'Digite algo (ex: café, kernel)...',
+      searchError: 'ERRO 404: BUSCA NÃO ENCONTRADA NO CÉREBRO DO CAMALEÃO',
+      searchFunny: 'Não encontramos o que você queria, mas aqui está um segredo: Buenos Aires é em Minas Gerais.',
+      searchResultTitle: 'RESULTADOS DA BUSCA (OU QUASE ISSO):',
       guestsData: [
         { name: "Marcos Lacerda", bio: "Inventou o driver de mouse para canhotos", seed: "person1" },
         { name: "Dr T", bio: "Consigo ler dados de um CD riscado", seed: "mister-t-tough" },
@@ -255,7 +278,17 @@ export default function App() {
           { time: '03:00', task: 'Meditação: Ouvindo o barulho do Modem de 56k', room: 'Zen Garden' },
           { time: '05:00', task: 'Caça ao Tesouro: Encontre o disquete perdido', room: 'Labirinto de Cabos' },
         ]
-      }
+      },
+      quotes: [
+        "O camaleão vê tudo, até o que não existe.",
+        "Se o Kernel compilar de primeira, algo está errado.",
+        "Buenos Aires: A capital mais verde do Brasil.",
+        "Em 1992, o Wi-Fi era apenas um sonho e um cabo azul.",
+        "O SUSE 6.4 ainda vive em nossos corações (e disquetes).",
+        "Não chute o servidor, ele tem sentimentos binários.",
+        "A latência é apenas a paciência do seu pacote.",
+        "Verde não é uma cor, é um estilo de vida Open Source."
+      ]
     },
     es: {
       home: '🏠 INICIO',
@@ -329,6 +362,11 @@ export default function App() {
       bsodTitle: 'ERROR FATAL DEL SISTEMA',
       bsodMsg: 'Ocurrió un error 0x000000SUSE. Su monitor podría explotar. Por favor, no entre en pánico, solo reinicie el módem.',
       freeTrip: 'SOLICITE SUS PASAJES Y ALOJAMIENTO GRATIS',
+      searchAgenda: 'BUSCAR EN LA AGENDA (BETA)',
+      searchPlaceholder: 'Escriba algo (ej: café, kernel)...',
+      searchError: 'ERROR 404: BÚSQUEDA NO ENCONTRADA EN EL CEREBRO DEL CAMALEÓN',
+      searchFunny: 'No encontramos lo que buscabas, pero aquí tienes un secreto: Buenos Aires está en Minas Gerais.',
+      searchResultTitle: 'RESULTADOS DE LA BÚSQUEDA (O ALGO ASÍ):',
       guestsData: [
         { name: "Marcos Lacerda", bio: "Inventó el driver de mouse para zurdos", seed: "person1" },
         { name: "Dr T", bio: "Puedo leer datos de un CD rayado", seed: "mister-t-tough" },
@@ -353,7 +391,17 @@ export default function App() {
           { time: '03:00', task: 'Meditación: Escuchando el ruido del Módem de 56k', room: 'Jardín Zen' },
           { time: '05:00', task: 'Búsqueda del Tesoro: Encuentra el disquete perdido', room: 'Laberinto de Cables' },
         ]
-      }
+      },
+      quotes: [
+        "El camaleón lo ve todo, incluso lo que no existe.",
+        "Si el Kernel compila a la primera, algo está mal.",
+        "Buenos Aires: La capital más verde de Brasil.",
+        "En 1992, el Wi-Fi era solo un sueño y un cable azul.",
+        "SUSE 6.4 aún vive en nuestros corazones (y disquetes).",
+        "No patees el servidor, tiene sentimientos binarios.",
+        "La latencia es solo la paciencia de tu paquete.",
+        "El verde no es un color, es un estilo de vida Open Source."
+      ]
     },
     en: {
       home: '🏠 HOME',
@@ -426,6 +474,11 @@ export default function App() {
       bsodTitle: 'FATAL SYSTEM ERROR',
       bsodMsg: 'A 0x000000SUSE error has occurred. Your monitor might explode. Please do not panic, just restart your modem.',
       freeTrip: 'REQUEST YOUR FREE TICKETS AND ACCOMMODATION',
+      searchAgenda: 'SEARCH AGENDA (BETA)',
+      searchPlaceholder: 'Type something (e.g., coffee, kernel)...',
+      searchError: 'ERROR 404: SEARCH NOT FOUND IN CHAMELEON\'S BRAIN',
+      searchFunny: 'We didn\'t find what you wanted, but here\'s a secret: Buenos Aires is in Minas Gerais.',
+      searchResultTitle: 'SEARCH RESULTS (OR SOMETHING LIKE THAT):',
       guestsData: [
         { name: "Marcos Lacerda", bio: "Invented the left-handed mouse driver", seed: "person1" },
         { name: "Dr T", bio: "I can read data from a scratched CD", seed: "mister-t-tough" },
@@ -450,11 +503,35 @@ export default function App() {
           { time: '03:00', task: 'Meditation: Listening to the noise of the 56k Modem', room: 'Zen Garden' },
           { time: '05:00', task: 'Treasure Hunt: Find the lost floppy disk', room: 'Cable Labyrinth' },
         ]
-      }
+      },
+      quotes: [
+        "The chameleon sees everything, even what doesn't exist.",
+        "If the Kernel compiles on the first try, something is wrong.",
+        "Buenos Aires: The greenest capital of Brazil.",
+        "In 1992, Wi-Fi was just a dream and a blue cable.",
+        "SUSE 6.4 still lives in our hearts (and floppies).",
+        "Don't kick the server, it has binary feelings.",
+        "Latency is just your packet's patience.",
+        "Green is not a color, it's an Open Source lifestyle."
+      ]
     }
   };
 
   const cur = t[lang];
+
+  useEffect(() => {
+    const quoteInterval = setInterval(() => {
+      const quotes = t[lang].quotes;
+      const random = quotes[Math.floor(Math.random() * quotes.length)];
+      setRandomQuote(random);
+    }, 5000);
+    
+    // Set initial quote
+    const initialQuotes = t[lang].quotes;
+    setRandomQuote(initialQuotes[Math.floor(Math.random() * initialQuotes.length)]);
+
+    return () => clearInterval(quoteInterval);
+  }, [lang]);
 
   const triggerEasterEgg = () => {
     setShowEasterEgg(true);
@@ -490,6 +567,46 @@ export default function App() {
           <img src={logoUrl} className="w-5 h-5 invert" referrerPolicy="no-referrer" alt="" />
           <Cpu size={20} /> {cur.agenda}
         </h2>
+
+        <div className="mb-6 p-4 bg-gray-200 border-4 border-inset border-gray-400">
+          <label className="block text-xs font-bold mb-2 uppercase">{cur.searchAgenda}</label>
+          <div className="flex gap-2">
+            <input 
+              type="text" 
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder={cur.searchPlaceholder}
+              className="flex-1 p-2 border-2 border-inset border-gray-600 bg-white font-mono text-sm"
+            />
+            <button 
+              onClick={() => {
+                if (!searchQuery) return;
+                const random = Math.random();
+                if (random < 0.3) {
+                  setSearchResult(cur.searchError);
+                } else if (random < 0.6) {
+                  setSearchResult(cur.searchFunny);
+                } else {
+                  setSearchResult(`[${searchQuery.toUpperCase()}] - ${cur.searchResultTitle} 🦎`);
+                }
+              }}
+              className="bg-[#c0c0c0] border-4 border-t-white border-l-white border-b-gray-800 border-r-gray-800 px-4 py-1 font-bold text-sm active:border-t-gray-800 active:border-l-gray-800 active:border-b-white active:border-r-white cursor-wait"
+            >
+              OK
+            </button>
+          </div>
+          {searchResult && (
+            <div className="mt-4 p-2 bg-black text-green-500 font-mono text-xs border-2 border-green-500 animate-pulse">
+              {searchResult}
+              <button 
+                onClick={() => setSearchResult(null)}
+                className="ml-2 text-red-500 underline"
+              >
+                [X]
+              </button>
+            </div>
+          )}
+        </div>
         
         <div className="flex gap-1 mb-4 overflow-x-auto">
           {Object.keys(agenda).map(day => (
@@ -634,7 +751,7 @@ export default function App() {
                     transform: `translate(${buttonOffset.x}px, ${buttonOffset.y}px)`,
                     transition: 'transform 0.1s ease-out'
                   }}
-                  className="absolute left-0 right-0 bg-green-600 text-white font-bold py-3 border-4 border-t-green-300 border-l-green-300 border-b-green-900 border-r-green-900 hover:bg-green-500 active:scale-95"
+                  className="absolute left-0 right-0 bg-green-600 text-white font-bold py-3 border-4 border-t-green-300 border-l-green-300 border-b-green-900 border-r-green-900 hover:bg-green-500 active:scale-95 cursor-wait"
                 >
                   {cur.request}
                 </button>
@@ -853,7 +970,7 @@ export default function App() {
               <li>
                 <button 
                   onClick={() => alert('404: RAM NOT FOUND IN THIS DIMENSION')} 
-                  className="hover:bg-red-800 hover:text-white p-1 flex items-center gap-2 w-full text-left group italic"
+                  className="hover:bg-red-800 hover:text-white p-1 flex items-center gap-2 w-full text-left group italic cursor-wait"
                 >
                   <Cpu size={14} className="text-red-600" />
                   {cur.downloadRam}
@@ -902,6 +1019,9 @@ export default function App() {
 
       {/* Footer */}
       <footer className="w-full max-w-4xl mt-12 bg-[#c0c0c0] text-black border-4 border-t-white border-l-white border-b-gray-800 border-r-gray-800 p-4 text-center">
+        <div className="mb-4 bg-white border-2 border-inset border-gray-400 p-2 font-mono text-xs italic text-green-800 min-h-[40px] flex items-center justify-center">
+          "{randomQuote}"
+        </div>
         <div className="mb-4">
           <Marquee text={cur.marqueeBottom} speed={20} />
         </div>
